@@ -17,7 +17,7 @@ RegisterCommand("siren", function()
     local ped = PlayerPedId()
     if (IsPedInAnyPoliceVehicle(ped)) then
         local vehicle = GetVehiclePedIsIn(ped, false)
-        if (GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 1) == ped) then
+        if (GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 0) == ped) then
             if (IsVehicleSirenOn(vehicle) == 1) then
                 toogleSiren(ped, vehicle)
             else
@@ -33,7 +33,7 @@ CreateThread(function()
         local ped = PlayerPedId()
         if (IsPedInAnyPoliceVehicle(ped)) then
             local vehicle = GetVehiclePedIsIn(ped, false)
-            if ((GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 1) == ped)) then
+            if ((GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 0) == ped)) then
                 if (siren == false) then
                     SetVehicleHasMutedSirens(vehicle, true)
                 end
