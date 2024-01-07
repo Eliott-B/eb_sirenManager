@@ -33,8 +33,19 @@ CreateThread(function()
         local ped = PlayerPedId()
         if (IsPedInAnyPoliceVehicle(ped)) then
             local vehicle = GetVehiclePedIsIn(ped, false)
-            if ((GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 1) == ped) and siren == false) then
-                SetVehicleHasMutedSirens(vehicle, true)
+            if ((GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 1) == ped)) then
+                if (siren == false) then
+                    SetVehicleHasMutedSirens(vehicle, true)
+                end
+                if (IsVehicleSirenOn(vehicle) == 1) then
+                    if (siren == false) then
+                        SirenOff()
+                    else
+                        SirenOn()
+                    end
+                else
+                    LightOff()
+                end
             end
         end
 	end
