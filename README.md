@@ -8,8 +8,7 @@ Police siren manager for FiveM
  - And add the script in your `ressources.cfg`.
 
 ## KEYBIND
- - `J` : Toogle horn siren.
- - `K` : Toogle siren.
+ - `J` : Toogle siren if light is on else toogle horn siren.
 
 ## CONTRIBUTORS
 
