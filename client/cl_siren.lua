@@ -1,10 +1,10 @@
 siren = true;
 
-function hornSiren(vehicle)
+local function hornSiren(vehicle)
 	BlipSiren(vehicle)
 end
 
-function toogleSiren(ped, vehicle)
+local function toogleSiren(ped, vehicle)
 	if (siren == false) then
         SetVehicleHasMutedSirens(vehicle, false)
         siren = true;

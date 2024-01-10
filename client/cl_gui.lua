@@ -1,4 +1,4 @@
-function Draw2DText(x, y, text, scale)
+local function Draw2DText(x, y, text, scale)
     SetTextFont(4)
     SetTextProportional(7)
     SetTextScale(scale, scale)
@@ -11,14 +11,14 @@ function Draw2DText(x, y, text, scale)
     DrawText(x, y)
 end
 
-function SirenOn()
+local function SirenOn()
     sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~g~On", 0.45)
 end
 
-function SirenOff()
+local function SirenOff()
     sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~r~Off", 0.45)
 end
 
-function LightOff()
+local function LightOff()
     sirenIndication = Draw2DText(0.95, 0.94, "Light : ~r~Off", 0.45)
 end
