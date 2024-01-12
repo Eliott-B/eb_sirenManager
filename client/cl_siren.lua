@@ -52,3 +52,9 @@ CreateThread(function()
 end)
 
 RegisterKeyMapping('siren', 'Toogle siren', 'keyboard', 'j')
+
+RegisterNetEvent('eb:toggleSiren')
+AddEventHandler('eb:toggleSiren', toogleSiren())
+
+RegisterNetEvent('eb:hornSiren')
+AddEventHandler('eb:hornSiren', hornSiren())

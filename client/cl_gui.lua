@@ -11,14 +11,14 @@ local function Draw2DText(x, y, text, scale)
     DrawText(x, y)
 end
 
-local function SirenOn()
+function SirenOn()
     sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~g~On", 0.45)
 end
 
-local function SirenOff()
+function SirenOff()
     sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~r~Off", 0.45)
 end
 
-local function LightOff()
+function LightOff()
     sirenIndication = Draw2DText(0.95, 0.94, "Light : ~r~Off", 0.45)
 end
