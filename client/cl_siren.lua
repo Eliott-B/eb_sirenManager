@@ -1,60 +1,58 @@
-siren = true;
-
-local function hornSiren(vehicle)
-	BlipSiren(vehicle)
-end
-
-local function toogleSiren(ped, vehicle)
-	if (siren == false) then
-        SetVehicleHasMutedSirens(vehicle, false)
-        siren = true;
-    elseif (siren == true) then
-        siren = false;
+local function IsPedInSeat(veh, ped, seats)
+    for _, seat in pairs(seats) do
+        if GetPedInVehicleSeat(veh, seat) == ped then
+            return true
+        end
     end
+    return false
 end
 
 RegisterCommand("siren", function()
     local ped = PlayerPedId()
-    if (IsPedInAnyPoliceVehicle(ped)) then
-        local vehicle = GetVehiclePedIsIn(ped, false)
-        if (GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 0) == ped) then
-            if (IsVehicleSirenOn(vehicle) == 1) then
-                toogleSiren(ped, vehicle)
-            else
-                hornSiren(vehicle)
-            end
-        end
+    local veh = GetVehiclePedIsIn(ped, false)
+
+    if veh == 0 then return end
+    if not IsPedInAnyPoliceVehicle(ped) or not IsPedInSeat(veh, ped, {-1, 0}) then return end
+
+    local vehNetId = NetworkGetNetworkIdFromEntity(veh)
+    if IsVehicleSirenOn(veh) then
+        TriggerServerEvent("eb:toggleSiren", vehNetId)
+    else
+        TriggerServerEvent("eb:hornSiren", vehNetId)
     end
 end)
 
-CreateThread(function()
+Citizen.CreateThread(function()
+    local ped = PlayerPedId()
+    local text
 	while true do
-		Wait(0)
-        local ped = PlayerPedId()
-        if (IsPedInAnyPoliceVehicle(ped)) then
-            local vehicle = GetVehiclePedIsIn(ped, false)
-            if ((GetPedInVehicleSeat(vehicle, -1) == ped or GetPedInVehicleSeat(vehicle, 0) == ped)) then
-                if (siren == false) then
-                    SetVehicleHasMutedSirens(vehicle, true)
-                end
-                if (IsVehicleSirenOn(vehicle) == 1) then
-                    if (siren == false) then
-                        SirenOff()
-                    else
-                        SirenOn()
-                    end
+        local veh = GetVehiclePedIsIn(ped, false)
+        if veh ~= 0 and IsPedInAnyPoliceVehicle(ped) and IsPedInSeat(veh, ped, {-1, 0}) then
+            if IsVehicleSirenOn(veh) then
+                if IsVehicleSirenAudioOn(veh) then
+                    text = "Siren : ~g~On"
                 else
-                    LightOff()
+                    text = "Siren : ~r~Off"
                 end
+            else
+                text = "Light : ~r~Off"
             end
+            Draw2DText(0.95, 0.94, text, 0.45)
         end
+        Citizen.Wait(5)
 	end
 end)
 
-RegisterKeyMapping('siren', 'Toogle siren', 'keyboard', 'j')
+RegisterKeyMapping('siren', 'Toggle siren', 'keyboard', 'j')
 
 RegisterNetEvent('eb:toggleSiren')
-AddEventHandler('eb:toggleSiren', toogleSiren())
+AddEventHandler('eb:toggleSiren', function(vehNetId)
+    local veh = NetworkGetEntityFromNetworkId(vehNetId)
+    SetVehicleHasMutedSirens(veh, IsVehicleSirenAudioOn(veh))
+end)
 
 RegisterNetEvent('eb:hornSiren')
-AddEventHandler('eb:hornSiren', hornSiren())
+AddEventHandler('eb:hornSiren', function(vehNetId)
+    local veh = NetworkGetEntityFromNetworkId(vehNetId)
+    BlipSiren(veh)
+end)
