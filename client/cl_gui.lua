@@ -10,15 +10,3 @@ function Draw2DText(x, y, text, scale)
     AddTextComponentString(text)
     DrawText(x, y)
 end
-
-function SirenOn()
-    sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~g~On", 0.45)
-end
-
-function SirenOff()
-    sirenIndication = Draw2DText(0.95, 0.94, "Siren : ~r~Off", 0.45)
-end
-
-function LightOff()
-    sirenIndication = Draw2DText(0.95, 0.94, "Light : ~r~Off", 0.45)
-end
