@@ -8,11 +8,13 @@ Police siren manager for FiveM
  - And add the script in your `ressources.cfg`.
 
 ## KEYBIND
- - `J` : Toogle siren if light is on else toogle horn siren.
+ - `J` : Toggle siren if light is on else toogle horn siren.
+ - `E` : Toggle light when you are on passenger seat.
 
 ## CONTRIBUTORS
 
 - [Eliott-B](https://github.com/Eliott-B)
+- [JellyPh1sh](https://github.com/jellyph1sh)
 
 ## HELP
 
