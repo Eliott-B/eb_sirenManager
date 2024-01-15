@@ -24,20 +24,13 @@ end)
 
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
-    local text
+    local visible = false;
 	while true do
         local veh = GetVehiclePedIsIn(ped, false)
         if veh ~= 0 and IsPedInAnyPoliceVehicle(ped) and IsPedInSeat(veh, ped, {-1, 0}) then
-            if IsVehicleSirenOn(veh) then
-                if IsVehicleSirenAudioOn(veh) then
-                    text = "Siren : ~g~On"
-                else
-                    text = "Siren : ~r~Off"
-                end
-            else
-                text = "Light : ~r~Off"
-            end
-            Draw2DText(0.95, 0.94, text, 0.45)
+            if (not visible) then SendNUIMessage({type = "show"}) end
+        else
+            if (visible) then SendNUIMessage({type = "show"}) end
         end
         Citizen.Wait(5)
 	end
@@ -55,4 +48,8 @@ RegisterNetEvent('eb:hornSiren')
 AddEventHandler('eb:hornSiren', function(vehNetId)
     local veh = NetworkGetEntityFromNetworkId(vehNetId)
     BlipSiren(veh)
+end)
+
+RegisterCommand("show-nui", function()
+    SendNUIMessage({type = "show"})
 end)

@@ -16,9 +16,9 @@ server_scripts {
     "server/sv_sync.lua"
 }
 
-ui_page "web/build/index.html"
+ui_page "web/dist/index.html"
 
 files {
-    "web/build/index.html",
-    "web/build/**/*"
+    "web/dist/index.html",
+    "web/dist/**/*"
 }
