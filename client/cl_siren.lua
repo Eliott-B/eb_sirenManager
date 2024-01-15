@@ -22,6 +22,18 @@ RegisterCommand("siren", function()
     end
 end)
 
+RegisterCommand("passengerLight", function()
+    local ped = PlayerPedId()
+    local veh = GetVehiclePedIsIn(ped, false)
+
+    if veh == 0 then return end
+    if not IsPedInAnyPoliceVehicle(ped) or not IsPedInSeat(veh, ped, {0}) then return end
+
+    local vehNetId = NetworkGetNetworkIdFromEntity(veh)
+    TriggerServerEvent("eb:toggleLight", vehNetId)
+    end
+end)
+
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
     local text
@@ -44,6 +56,7 @@ Citizen.CreateThread(function()
 end)
 
 RegisterKeyMapping('siren', 'Toggle siren', 'keyboard', 'j')
+RegisterKeyMapping('passengerLight', 'Toggle light for passenger', 'keyboard', 'e')
 
 RegisterNetEvent('eb:toggleSiren')
 AddEventHandler('eb:toggleSiren', function(vehNetId)
@@ -55,4 +68,10 @@ RegisterNetEvent('eb:hornSiren')
 AddEventHandler('eb:hornSiren', function(vehNetId)
     local veh = NetworkGetEntityFromNetworkId(vehNetId)
     BlipSiren(veh)
+end)
+
+RegisterNetEvent('eb:toggleLight')
+AddEventHandler('eb:toggleLight', function(vehNetId)
+    local veh = NetworkGetEntityFromNetworkId(vehNetId)
+    TriggerSiren(veh)
 end)
