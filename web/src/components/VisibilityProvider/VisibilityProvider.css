@@ -1,0 +1,9 @@
+.visibility-provider {
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    background-color: blue;
+}
