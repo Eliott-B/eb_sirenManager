@@ -1,9 +1,10 @@
+import ControlPanel from "../../components/ControlPanel/ControlPanel";
 import "./App.css";
 
 function App() {
   return (
     <div className="app">
-      <h1>Title</h1>
+      <ControlPanel/>
     </div>
   )
 }
