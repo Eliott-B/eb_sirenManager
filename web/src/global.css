@@ -1,0 +1,21 @@
+@font-face {
+    font-family: RobotoCondensed;
+    src: url("fonts/RobotoCondensed-VariableFont_wght.ttf")
+}
+
+@font-face {
+    font-family: RobotoCondensedItalic;
+    src: url("fonts/RobotoCondensed-Italic-VariableFont_wght.ttf")
+}
+
+:root {
+    --cp-green: #11D000;
+    --cp-grey: #1F1F1F;
+
+    font-family: RobotoCondensed;
+}
+
+h1, h2, h3, h4, p {
+    padding: 0;
+    margin: 0;
+}

@@ -5,7 +5,7 @@ import "./ControlPanel.css";
 import Button from "../Button/Button";
 
 const ControlPanel = () => {
-    const [siren, setSiren] = useState(true)
+    const [siren, setSiren] = useState(false)
     const [lights, setLights] = useState(false)
 
     useEffect(() => {
@@ -21,26 +21,11 @@ const ControlPanel = () => {
 
     return (
         <div className="cp-box">
-            <div className="cp-header">
-                <h3 className="cp-title">SirenManager</h3>
-            </div>
-            <div className="cp-body">
-                <Button title={"Hide"}/>
-                <Button title={"Lamp"}/>
-                <Button title={"Mode"}/>
-                <Button title={"Light"} setActive={lights}/>
-                <Button title={"Mix"}/>
-                <Button title={"Fast"}/>
-                <Button title={"Wail"} setActive={siren}/>
-                <Button title={"Yelp"}/>
-                <Button title={"PHSR"}/>
-                <Button title={"Hilo"}/>
-                <Button title={"Man"}/>
-                <Button title={"Horn"}/>
-                <Button title={"S.E._1"}/>
-                <Button title={"S.E._2"}/>
-                <Button title={"1.5x"}/>
-                <Button title={"Siren"}/>
+            <h3 className="cp-title">EB_SIRENMANAGER</h3>
+            <div className="cp-buttons">
+                <Button title={"lights"} setActive={lights}/>
+                <Button title={"siren"} setActive={siren}/>
+                <Button title={"horn"} setActive={false}/>
             </div>
         </div>
     );
