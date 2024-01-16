@@ -1,0 +1,17 @@
+.cp-button {
+    width: 4.5vw;
+    height: fit-content;
+
+    border-radius: 5px;
+
+    background-color: rgba(0, 0, 0, 0.0);
+
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 0.25em 0;
+}
+
+.cp-button:focus {
+    outline: none;
+}
