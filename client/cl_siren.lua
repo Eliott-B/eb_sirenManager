@@ -24,15 +24,29 @@ end)
 
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
-    local visible = false;
+    local hasAlreadyVisible = false
+    local hasLightsAlreadyOn = false
 	while true do
-        local veh = GetVehiclePedIsIn(ped, false)
-        if veh ~= 0 and IsPedInAnyPoliceVehicle(ped) and IsPedInSeat(veh, ped, {-1, 0}) then
-            if (not visible) then SendNUIMessage({type = "show"}) end
-        else
-            if (visible) then SendNUIMessage({type = "show"}) end
+        if IsPedInAnyPoliceVehicle(ped) then
+            local veh = GetVehiclePedIsIn(ped, false)
+            if (IsVehicleSirenOn(veh) and not hasLightsAlreadyOn) then
+                SendNUIMessage({type = "lights", lights = true})
+                SendNUIMessage({type = "siren", siren = IsVehicleSirenAudioOn(veh)})
+                hasLightsAlreadyOn = true
+            elseif (not IsVehicleSirenOn(veh) and hasLightsAlreadyOn) then
+                SendNUIMessage({type = "lights", lights = false})
+                SendNUIMessage({type = "siren", lights = false})
+                hasLightsAlreadyOn = false
+            end
+            if (not hasAlreadyVisible and IsPedInSeat(veh, ped, {-1, 0})) then
+                SendNUIMessage({type = "show"})
+                hasAlreadyVisible = true
+            end
+        elseif (hasAlreadyVisible) then
+                SendNUIMessage({type = "show"})
+                hasAlreadyVisible = false
         end
-        Citizen.Wait(5)
+        Citizen.Wait(500)
 	end
 end)
 
@@ -40,8 +54,12 @@ RegisterKeyMapping('siren', 'Toggle siren', 'keyboard', 'j')
 
 RegisterNetEvent('eb:toggleSiren')
 AddEventHandler('eb:toggleSiren', function(vehNetId)
+    local ped = PlayerPedId()
     local veh = NetworkGetEntityFromNetworkId(vehNetId)
     SetVehicleHasMutedSirens(veh, IsVehicleSirenAudioOn(veh))
+    if (veh == GetVehiclePedIsIn(ped, false) and IsPedInSeat(veh, ped, {-1, 0})) then
+        SendNUIMessage({type = "siren", siren = IsVehicleSirenAudioOn(veh)})
+    end
 end)
 
 RegisterNetEvent('eb:hornSiren')
