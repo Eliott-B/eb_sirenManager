@@ -84,7 +84,10 @@ end)
 RegisterNetEvent('eb:passengerLight')
 AddEventHandler('eb:passengerLight', function(vehNetId)
     local veh = NetworkGetEntityFromNetworkId(vehNetId)
-    SetVehicleSiren(veh, not IsVehicleSirenOn(veh)))
+    SetVehicleSiren(veh, not IsVehicleSirenOn(veh))
+    if (veh == GetVehiclePedIsIn(ped, false) and IsPedInSeat(veh, ped, {-1, 0})) then
+        SendNUIMessage({type = "lights", lights = IsVehicleSirenOn(veh)})
+    end
 end)
 
 RegisterCommand("show-nui", function()
