@@ -4,15 +4,17 @@
 Police siren manager for FiveM
 
 ## HOW TO SETUP
- - Clone this repository in your ressources directory with: `git clone https://github.com/Eliott-B/eb_sirenManager.git`.
+ - Download the last release: [v1.1.0](https://github.com/Eliott-B/eb_sirenManager/archive/refs/tags/1.1.0.zip).
  - And add the script in your `ressources.cfg`.
 
 ## KEYBIND
- - `J` : Toogle siren if light is on else toogle horn siren.
+ - `J` : Toggle siren if light is on else toogle horn siren.
+ - `E` : Toggle light when you are on passenger seat.
 
 ## CONTRIBUTORS
 
 - [Eliott-B](https://github.com/Eliott-B)
+- [JellyPh1sh](https://github.com/jellyph1sh)
 
 ## HELP
 
