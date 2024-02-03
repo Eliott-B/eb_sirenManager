@@ -8,8 +8,7 @@ description 'Emergency siren manager'
 version '1.0.0'
 
 client_scripts {
-    "client/cl_siren.lua",
-    "client/cl_gui.lua"
+    "client/cl_siren.lua"
 }
 
 server_scripts {
