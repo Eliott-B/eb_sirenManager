@@ -30,8 +30,7 @@ RegisterCommand("passengerLight", function()
     if not IsPedInAnyPoliceVehicle(ped) or not IsPedInSeat(veh, ped, {0}) then return end
 
     local vehNetId = NetworkGetNetworkIdFromEntity(veh)
-    TriggerServerEvent("eb:toggleLight", vehNetId)
-    end
+    TriggerServerEvent("eb:passengerLight", vehNetId)
 end)
 
 Citizen.CreateThread(function()
@@ -70,8 +69,8 @@ AddEventHandler('eb:hornSiren', function(vehNetId)
     BlipSiren(veh)
 end)
 
-RegisterNetEvent('eb:toggleLight')
-AddEventHandler('eb:toggleLight', function(vehNetId)
+RegisterNetEvent('eb:passengerLight')
+AddEventHandler('eb:passengerLight', function(vehNetId)
     local veh = NetworkGetEntityFromNetworkId(vehNetId)
     SetVehicleSiren(veh, not IsVehicleSirenOn(veh))
 end)
