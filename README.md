@@ -4,7 +4,7 @@
 Police siren manager for FiveM
 
 ## HOW TO SETUP
- - Clone this repository in your ressources directory with: `git clone https://github.com/Eliott-B/eb_sirenManager.git`.
+ - Download the last release: [v1.1.0](https://github.com/Eliott-B/eb_sirenManager/archive/refs/tags/1.1.0.zip).
  - And add the script in your `ressources.cfg`.
 
 ## KEYBIND
